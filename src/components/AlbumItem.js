@@ -9,8 +9,7 @@ class AlbumItem extends Component {
 
   showAlbum = ev => {
     ev.preventDefault();
-
-    console.log('Going to', this.link);
+    // console.log('Going to', this.link);
     this.props.history.push(this.link);
   }
 

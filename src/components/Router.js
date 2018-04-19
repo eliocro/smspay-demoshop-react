@@ -20,7 +20,7 @@ const Router = props => (
         />
         <Route exact path="/cart"
           component={ _props => (
-            <Cart {..._props}
+            <Cart { ..._props }
               cart={ props.cart }
               removeFromCart={ props.removeFromCart }
               updateCartItem={ props.updateCartItem }

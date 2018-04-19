@@ -11,12 +11,12 @@ class Album extends Component {
 
   componentWillMount () {
     const id = fromBase36(this.props.match.params.productId);
-    const p = this.product = products.filter(p => p.id === id)[0];
-    console.log('Showing:', p && p.name);
+    this.product = products.filter(p => p.id === id)[0];
+    // console.log('Showing:', p && p.name);
   }
 
   addToCart = () => {
-    console.log('Adding to cart:', this.product.name);
+    // console.log('Adding to cart:', this.product.name);
     const qty = parseInt(this.inputRef.current.value, 10);
     if(!qty) {
       return;

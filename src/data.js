@@ -76,7 +76,7 @@ const products = [{
   name: 'Your Wilderness',
   artist: 'The Pineapple Thief',
   cover: 'https://upload.wikimedia.org/wikipedia/en/d/dc/The_Pineapple_Thief_Your_Wilderness_Cover_Art.jpg',
-  desc: 'our Wilderness is the eleventh studio album by British rock band The Pineapple Thief. The album features several known guest musicians, including Gavin Harrison (Porcupine Tree, King Crimson), John Helliwell (Supertramp), and Geoffrey Richardson (Caravan).[1]',
+  desc: 'Your Wilderness is the eleventh studio album by British rock band The Pineapple Thief. The album features several known guest musicians, including Gavin Harrison (Porcupine Tree, King Crimson), John Helliwell (Supertramp), and Geoffrey Richardson (Caravan).',
   year: 2016,
   price: 12000
 }];
