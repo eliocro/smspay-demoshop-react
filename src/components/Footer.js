@@ -4,7 +4,7 @@ import moment from 'moment';
 const year = moment().year();
 
 const Footer = props => (
-  <footer>
+  <footer className="container">
     <hr />
     <p className="muted">
       © SMS<em>pay</em> EksempelShop { year }. &nbsp;

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
-import logo from './logo.svg';
+import Footer from './Footer';
+import Header from './Header';
+import StoreFront from './StoreFront';
+
 import './App.css';
 
-import Footer from './components/Footer';
-import Header from './components/Header';
 
 class App extends Component {
   render() {

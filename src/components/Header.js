@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
-  render (props) {
+  render () {
     return (
-      <div className="container">
+      <header className="container">
         <div className="navbar navbar-inverse">
           <div className="navbar-inner">
             <div className="container">
@@ -34,7 +34,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </header>
     );
   }
 }
