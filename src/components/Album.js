@@ -6,13 +6,18 @@ import { fromBase36, getSlug, formatPrice } from '../helpers';
 
 
 class Album extends Component {
+  inputRef = React.createRef();
+
   componentWillMount () {
     const id = fromBase36(this.props.match.params.productId);
     const p = this.product = products.filter(p => p.id === id)[0];
     console.log('Showing:', p && p.name);
   }
 
-  inputRef = React.createRef();
+  toFrontpage = ev => {
+    ev && ev.preventDefault();
+    this.props.history.push('/');
+  };
 
   addToCart = () => {
     console.log('Adding to cart:', this.product.name);
@@ -20,6 +25,13 @@ class Album extends Component {
     if(!qty) {
       return;
     }
+
+    // Add product to cart
+    this.props.addToCart(this.product.id, qty);
+    alert('Added to cart');
+
+    // Go back to frontpage
+    this.toFrontpage();
   };
 
   render () {
@@ -52,7 +64,7 @@ class Album extends Component {
         </div>
 
         <div className="clearfix"></div>
-        <a href="/">See all products</a>
+        <a href="/" onClick={ this.toFrontpage }>See all products</a>
       </section>
     );
   }
