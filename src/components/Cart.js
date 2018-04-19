@@ -32,14 +32,13 @@ class Cart extends Component {
             </tr>
           </thead>
           <tbody>
-            { Object.keys(cart).map((k, i) => {
-              return (
-                <CartItem item={ cart[k] } index={ i } key={ k }
-                  remove={ this.props.removeFromCart }
-                  update={ this.props.updateCartItem }
-                />
-              );
-            }) }
+            { Object.keys(cart).map((k, i) => (
+              <CartItem item={ cart[k] } index={ i } key={ k }
+                remove={ this.props.removeFromCart }
+                update={ this.props.updateCartItem }
+                editable={ true }
+              />
+            )) }
           </tbody>
           <tfoot>
             <tr>
@@ -58,7 +57,7 @@ class Cart extends Component {
         </p>
         <br/>
         <p>
-          <Link to="/">Continue Shopping</Link>
+          <Link to="/">Continue shopping</Link>
         </p>
       </section>
     );

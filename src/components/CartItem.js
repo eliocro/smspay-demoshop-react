@@ -24,6 +24,7 @@ class CartItem extends Component {
   render () {
     const p = this.props.item;
     const link = `/product/${ toBase36(p.id) }/${ getSlug(p.name) }`;
+    const edit = !!this.props.editable;
 
     return (
       <tr>
@@ -32,7 +33,9 @@ class CartItem extends Component {
           <Link to={ link }>{ p.name }</Link>
         </td>
         <td>{ p.artist }</td>
+        { !edit && <td>{ p.qty }</td> }
         <td>{ formatPrice(p.price) } NOK</td>
+        { edit &&
         <td>
           <input
             type="number"
@@ -42,9 +45,8 @@ class CartItem extends Component {
             min="1"
           />
         </td>
-        <td>
-          <a href="" onClick={ this.remove }>Remove</a>
-        </td>
+        }
+        { edit && <td><a href="" onClick={ this.remove }>Remove</a></td> }
       </tr>
     );
   }
