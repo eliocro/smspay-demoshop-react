@@ -1,20 +1,34 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 
 import { toBase36, getSlug, formatPrice } from '../helpers';
 
 
-const AlbumItem = props => (
-  <li>
-    <a href={ `/product/${ toBase36(props.album.id) }/${ getSlug(props.album.name) }` }>
-      <img src={ props.album.cover } />
-      <div className="info">
-        <div className="title">{ props.album.name }</div>
-        <div className="artist">{ props.album.artist } ({ props.album.year })</div>
-        <div className="price">{ formatPrice(props.album.price) } NOK</div>
-      </div>
-    </a>
-  </li>
-);
+class AlbumItem extends Component {
+  link = `/product/${ toBase36(this.props.album.id) }/${ getSlug(this.props.album.name) }`;
+
+  showAlbum = ev => {
+    ev.preventDefault();
+
+    console.log('Going to', this.link);
+    this.props.history.push(this.link);
+  }
+
+  render () {
+    const { name, cover, artist, year, price } = this.props.album;
+    return (
+      <li>
+        <a href={ this.link } onClick={ this.showAlbum }>
+          <img src={ cover } alt={ getSlug(name) } />
+          <div className="info">
+            <div className="title">{ name }</div>
+            <div className="artist">{ artist } ({ year })</div>
+            <div className="price">{ formatPrice(price) } NOK</div>
+          </div>
+        </a>
+      </li>
+    );
+  }
+}
 
 export default AlbumItem;

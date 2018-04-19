@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Footer from './Footer';
 import Header from './Header';
-import StoreFront from './StoreFront';
+import Router from './Router';
 
 import './App.css';
 
@@ -12,9 +12,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-
-        <StoreFront />
-
+        <Router />
         <Footer />
       </div>
     );

@@ -14,7 +14,7 @@ class StoreFront extends Component {
 
         <ul className="products">
           { products.map(p => (
-            <AlbumItem album={ p } key={ p.id } />
+            <AlbumItem album={ p } key={ p.id } history={ this.props.history } />
           )) }
         </ul>
       </section>
