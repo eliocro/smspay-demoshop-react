@@ -1,8 +1,11 @@
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
   render () {
+    const { cart } = this.props;
+    const numItems = cart ? Object.keys(cart).reduce((a,k) => a + cart[k].qty, 0) : 0;
     return (
       <header className="container">
         <div className="navbar navbar-inverse">
@@ -15,21 +18,20 @@ class Header extends Component {
                 <span className="icon-bar"></span>
               </a>
 
-              <a className="brand" href="/">EksempelShop</a>
+              <Link className="brand" to="/" >EksempelShop</Link>
               <div className="nav-collapse navbar-responsive-collapse">
                 <ul className="nav">
                   <li><a href="/">Hjem</a></li>
                 </ul>
 
                 <form className="navbar-search pull-left" onClick={ this.props.findOrder }>
-                  <input type="text" className="search-query span2" placeholder="Søk SMSPay #"
+                  <input type="text" className="search-query span2" placeholder="Søk SMSpay #"
                     ng-model="orderId" pattern="[0-9]*" />
-                  <input type="submit" value="Search" style={{ display: 'none' }} />
+                  <input type="submit" value="Search" hidden />
                 </form>
                 <ul className="nav pull-right">
-                  <li><a href="/cart">Vis handlekurv (0 items)</a></li>
+                  <li><Link to="/cart">Vis handlekurv ({ numItems } items)</Link></li>
                 </ul>
-
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import { products } from '../data';
 import { fromBase36, getSlug, formatPrice } from '../helpers';
@@ -14,11 +15,6 @@ class Album extends Component {
     console.log('Showing:', p && p.name);
   }
 
-  toFrontpage = ev => {
-    ev && ev.preventDefault();
-    this.props.history.push('/');
-  };
-
   addToCart = () => {
     console.log('Adding to cart:', this.product.name);
     const qty = parseInt(this.inputRef.current.value, 10);
@@ -31,7 +27,7 @@ class Album extends Component {
     alert('Added to cart');
 
     // Go back to frontpage
-    this.toFrontpage();
+    this.props.history.push('/');
   };
 
   render () {
@@ -64,7 +60,7 @@ class Album extends Component {
         </div>
 
         <div className="clearfix"></div>
-        <a href="/" onClick={ this.toFrontpage }>See all products</a>
+        <Link to="/">See all products</Link>
       </section>
     );
   }

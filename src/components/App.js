@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Footer from './Footer';
-import Header from './Header';
 import Router from './Router';
 
 import { products } from '../data.js';
@@ -68,8 +67,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <Router addToCart={ this.addToCart } />
+        <Router addToCart={ this.addToCart }  cart={ this.state.cart } />
         <Footer />
       </div>
     );

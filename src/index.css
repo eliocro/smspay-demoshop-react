@@ -3,6 +3,10 @@ body {
   background-color: #e5e5e5;
 }
 
+[hidden], .hidden {
+  display: none;
+}
+
 .products {
   margin: 20px 0 0;
   padding: 0;
