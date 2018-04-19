@@ -25,7 +25,7 @@ class App extends Component {
     this.loadCart();
   }
 
-  addToCart = (id, qty) => {
+  addToCart = (id, qty = 1) => {
     const product = products.filter(p => p.id === id)[0];
     if(!product) {
       return;

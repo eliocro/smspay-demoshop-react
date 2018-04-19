@@ -4,20 +4,53 @@ import { Link } from 'react-router-dom';
 
 import CartItem from './CartItem';
 import { formatPrice } from '../helpers';
-import { shipping } from '../data';
+import { shipping as shipOptions } from '../data';
+
+const merchantName = 'EksempelShop';
+const merchantId = 8397064334568568;
 
 
 class Checkout extends Component {
+  inputRef = React.createRef();
+
   state = {
     shipping: 0
   };
 
   componentWillMount () {
-    this.setState({ shipping: shipping[0].price });
+    this.setState({ shipping: shipOptions[0].price });
   }
 
-  placeOrder = () => {
+  placeOrder = ev => {
+    ev.preventDefault();
+
+    let phone = this.inputRef.current.value;
+    if(phone.length < 10) {
+      phone = '47' + phone;
+    }
+
+    const ref = Math.floor(Math.random() * 9000) + 1000;
+    const order = {
+      phone: phone,
+      invoice: ref.toString(),
+      description: 'Order #' + ref + ' from ' + merchantName,
+      currency: 'NOK',
+      shipping: this.state.shipping,
+      merchant: merchantId,
+    };
+
     const { cart } = this.props;
+    let i = 1;
+    for(const k in cart) {
+      const item = cart[k];
+      order['item_number_' + i] = ref * 1000 + item.id;
+      order['item_name_' + i] = item.name;
+      order['amount_' + i] = item.price;
+      order['quantity_' + i] = item.qty;
+      i++;
+    }
+
+    console.log('Order:', order);
   }
 
   setShipping = ev => {
@@ -37,10 +70,12 @@ class Checkout extends Component {
     const count = Object.keys(cart).reduce((a,k) => a + cart[k].qty, 0);
     const total = Object.keys(cart).reduce((a,k) => a + cart[k].price * cart[k].qty, 0);
 
-    const shipOptions = shipping.map((s, i) => (
+    const options = shipOptions.map((s, i) => (
       <option value={ s.price } key={ i }>{ s.location }</option>
     ));
-    const final = total + (this.state.shipping || 0);
+
+    const { shipping } = this.state;
+    const final = total + shipping;
 
     return (
       <section className="container">
@@ -77,7 +112,7 @@ class Checkout extends Component {
               <th></th>
               <th colSpan="3">
                 <select onChange={ this.setShipping }>
-                  { shipOptions }
+                  { options }
                 </select>
                 <span>Shipping</span>
               </th>
@@ -91,11 +126,14 @@ class Checkout extends Component {
           <form onSubmit={ this.placeOrder }>
             <h4>Your Total: { formatPrice(final) } NOK</h4>
             <br/>
-
-            <input type="text" ng-model="customer.phone"
-              placeholder="Your phone number" pattern="[0-9]{8,12}" required />
+            <input
+              type="text"
+              ref={ this.inputRef }
+              placeholder="Your phone number"
+              pattern="[0-9]{8,12}"
+              required
+            />
             <br/><br/>
-
             <input type="submit" className="btn btn-primary btn-large" value="Place order" />
           </form>
         </div>
@@ -110,6 +148,5 @@ class Checkout extends Component {
     );
   }
 }
-
 
 export default Checkout;
