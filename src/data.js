@@ -71,6 +71,14 @@ const products = [{
   desc: 'Venus Isle is the fourth studio album by guitarist Eric Johnson, released on September 3, 1996 through Capitol Records. The fourth track, "S.R.V.", is a tribute to guitarist Stevie Ray Vaughan, and features his elder brother Jimmie Vaughan as a guest soloist.',
   year: 1996,
   price: 9900
+}, {
+  id: 100,
+  name: 'Your Wilderness',
+  artist: 'The Pineapple Thief',
+  cover: 'https://upload.wikimedia.org/wikipedia/en/d/dc/The_Pineapple_Thief_Your_Wilderness_Cover_Art.jpg',
+  desc: 'our Wilderness is the eleventh studio album by British rock band The Pineapple Thief. The album features several known guest musicians, including Gavin Harrison (Porcupine Tree, King Crimson), John Helliwell (Supertramp), and Geoffrey Richardson (Caravan).[1]',
+  year: 2014,
+  price: 12000
 }];
 
 const shipping = [{
