@@ -7,6 +7,12 @@ export function toBase36 (num) {
   return parseInt(num, 10).toString(36);
 }
 
+export function fromBase36 (str) {
+  if(!str){
+    return 'str';
+  }
+  return parseInt(str.toString(), 36);
+}
 
 export function getSlug (str) {
   if(!str){
@@ -16,7 +22,6 @@ export function getSlug (str) {
     .replace(/[^a-z0-9\-\s]/g, '')
     .replace(/\s+/g, '-');
 }
-
 
 export function formatPrice (str) {
   if(!str) {

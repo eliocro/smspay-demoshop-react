@@ -1,0 +1,144 @@
+body {
+  padding: 20px;
+  background-color: #e5e5e5;
+}
+
+.products {
+  margin: 20px 0 0;
+  padding: 0;
+}
+.products li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 10px 20px;
+  padding: 0;
+  background: #fff;
+}
+.products li:hover {
+  background: #f9f9f9;
+}
+
+.products a {
+  width: 200px;
+  height: 300px;
+  display: block;
+  list-style: none;
+  display: inline-block;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+.products img {
+  width: 200px;
+  height: 200px;
+}
+
+.products .info {
+  padding: 10px;
+}
+.products .info .title {
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+  margin: 4px 0 0;
+  font-size: 16px;
+  color: #000;
+}
+.products .info .artist {
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #888;
+}
+.products .info .price {
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+  margin: 8px 0 0;
+  text-align: right;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fb8521;
+}
+
+
+.item img {
+  width: 300px;
+  height: 300px;
+  margin: 0 30px 30px 0;
+  float: left;
+}
+
+.item .info {
+  float: left;
+  max-width: 600px;
+}
+.item .info .title {
+  position: relative;
+  margin: 4px 0 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+.item .info .artist {
+  position: relative;
+  margin: 4px 0 0;
+  font-size: 18px;
+  color: #666;
+}
+
+.item .info .description {
+  position: relative;
+  margin: 15px 0 0;
+  font-size: 14px;
+  color: #888;
+}
+
+.item .info .price {
+  position: relative;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fb8521;
+}
+
+.item input[type="text"], .item input[type="number"] {
+  width: 50px;
+  text-align: right;
+}
+
+
+.cart input[type="text"], .cart input[type="number"] {
+  width: 50px;
+  text-align: right;
+  margin-bottom: 0;
+}
+
+.cart tbody>tr:nth-child(even)>td {
+  background: #f0f0f0;
+}
+.cart .center {
+  padding-left: 50px;
+}
+
+.checkout tbody>tr:nth-child(even)>td{
+  background: #f0f0f0;
+}
+.checkout select {
+  float: right;
+  margin-bottom: 0;
+}
+
+span.item-strong {
+  display: inline-block;
+  width: 180px;
+  font-weight: bold;
+  text-align: right;
+  font-size: 15px;
+  margin-right: 10px;
+}
+span.alert {
+  font-weight: bold;
+}
