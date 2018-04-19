@@ -12,16 +12,13 @@ class App extends Component {
   };
 
   loadCart () {
-    const cached = sessionStorage.getItem('smspay-cart');
-    if(!cached) {
-      return;
-    }
-    this.setState({ cart: JSON.parse(cached) });
+    const str = sessionStorage.getItem('smspay-cart');
+    str && this.setState({ cart: JSON.parse(str) });
   }
 
-  saveCart () {
-    const cart = { ...this.state.cart };
-    sessionStorage.setItem('smspay-cart', JSON.stringify(cart));
+  saveCart (cart) {
+    const str = JSON.stringify(cart);
+    sessionStorage.setItem('smspay-cart', str);
   }
 
   componentWillMount () {
@@ -51,7 +48,7 @@ class App extends Component {
 
     // Update state and save to sessionStorage
     this.setState({ cart });
-    this.saveCart();
+    this.saveCart(cart);
   };
 
   removeFromCart = id => {
@@ -61,13 +58,35 @@ class App extends Component {
 
     // Update state and save to sessionStorage
     this.setState({ cart });
-    this.saveCart();
+    this.saveCart(cart);
   };
+
+  updateCartItem = (id, qty) => {
+    const product = products.filter(p => p.id === id)[0];
+    if(!product) {
+      return;
+    }
+
+    // Update item in cart
+    const cart = { ...this.state.cart };
+    if(cart[id]) {
+      cart[id].qty = qty;
+    }
+
+    // Update state and save to sessionStorage
+    this.setState({ cart });
+    this.saveCart(cart);
+  }
 
   render() {
     return (
       <div className="App">
-        <Router addToCart={ this.addToCart }  cart={ this.state.cart } />
+        <Router
+          cart={ this.state.cart }
+          addToCart={ this.addToCart }
+          removeFromCart={ this.removeFromCart }
+          updateCartItem={ this.updateCartItem }
+        />
         <Footer />
       </div>
     );
