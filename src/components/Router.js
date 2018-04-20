@@ -8,6 +8,7 @@ import Album from './Album';
 import Cart from './Cart';
 import Checkout from './Checkout';
 import NotFound from './NotFound';
+import Login from './Login';
 
 
 const Router = props => (
@@ -31,6 +32,11 @@ const Router = props => (
         ) } />
         <Route component={ NotFound } />
       </Switch>
+      <Login
+        visible={ props.loginVisible }
+        hideLogin={ props.hideLogin }
+        saveAuth={ props.saveAuth }
+      />
     </div>
   </BrowserRouter>
 );
