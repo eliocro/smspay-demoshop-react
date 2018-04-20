@@ -85,6 +85,12 @@ class App extends Component {
     this.saveCart(cart);
   };
 
+  clearCart = () => {
+    // Update state and save to sessionStorage
+    this.setState({ cart: {} });
+    this.saveCart({});
+  };
+
 
   // Login modal
 
@@ -127,6 +133,7 @@ class App extends Component {
           addToCart={ this.addToCart }
           removeFromCart={ this.removeFromCart }
           updateCartItem={ this.updateCartItem }
+          clearCart={ this.clearCart }
 
           loginVisible={ this.state.login }
           hideLogin={ this.hideLogin }

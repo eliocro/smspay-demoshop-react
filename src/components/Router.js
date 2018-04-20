@@ -39,6 +39,7 @@ const Router = props => (
           <Checkout { ..._props }
             cart={ props.cart }
             auth={ props.auth }
+            clearCart={ props.clearCart }
           />
         ) } />
          <Route path="/order/:isNew/:orderId" component={ _props => (

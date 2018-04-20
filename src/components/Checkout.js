@@ -22,7 +22,7 @@ class Checkout extends Component {
 
   placeOrder = ev => {
     ev.preventDefault();
-    const { auth, history } = this.props;
+    const { auth, history, clearCart } = this.props;
     if(!auth) {
       return history.push('/cart');
     }
@@ -60,6 +60,8 @@ class Checkout extends Component {
 
       const id = toBase36(res.reference);
       history.push(`/order/1/${id}`);
+
+      clearCart();
     })
     .catch(err => {
       console.log(err);
