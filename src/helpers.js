@@ -1,4 +1,5 @@
 
+import moment from 'moment';
 
 export function toBase36 (num) {
   if(!num){
@@ -36,4 +37,9 @@ export function formatPrice (str) {
     return '0,' + str;
   }
   return str.slice(0,-2) + ',' + str.slice(-2);
+}
+
+export function formatDate (str) {
+  const d = moment(new Date(str));
+  return d.format('YYYY.MM.DD HH:mm');
 }

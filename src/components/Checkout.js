@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 import * as SMSpay from '../smspay';
 
-import { formatPrice } from '../helpers';
+import { formatPrice, toBase36 } from '../helpers';
 import { shipping as shipOptions } from '../data';
 
 
@@ -22,9 +22,9 @@ class Checkout extends Component {
 
   placeOrder = ev => {
     ev.preventDefault();
-    const { auth } = this.props;
+    const { auth, history } = this.props;
     if(!auth) {
-      return this.props.history.push('/cart');
+      return history.push('/cart');
     }
 
     let phone = this.inputRef.current.value;
@@ -57,6 +57,9 @@ class Checkout extends Component {
     SMSpay.createOrder(order, auth)
     .then(res => {
       console.log('Result:', res);
+
+      const id = toBase36(res.reference);
+      history.push(`/order/1/${id}`);
     })
     .catch(err => {
       console.log(err);
@@ -74,8 +77,17 @@ class Checkout extends Component {
 
   render () {
     const { cart, auth } = this.props;
-    if(!cart || !auth) {
+    if(!cart) {
       return null;
+    }
+
+    if(!auth) {
+      return (
+        <section className="container">
+          <h1 className="center">Checkout</h1>
+          <p>You need to login before you can checkout</p>
+        </section>
+      );
     }
 
     const count = Object.keys(cart).reduce((a,k) => a + cart[k].qty, 0);

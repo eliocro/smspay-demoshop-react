@@ -7,6 +7,7 @@ import StoreFront from './StoreFront';
 import Album from './Album';
 import Cart from './Cart';
 import Checkout from './Checkout';
+import Order from './Order';
 import NotFound from './NotFound';
 import Login from './Login';
 
@@ -39,6 +40,9 @@ const Router = props => (
             cart={ props.cart }
             auth={ props.auth }
           />
+        ) } />
+         <Route path="/order/:isNew/:orderId" component={ _props => (
+          <Order {..._props} auth={ props.auth } />
         ) } />
         <Route component={ NotFound } />
       </Switch>

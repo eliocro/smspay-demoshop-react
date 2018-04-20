@@ -1,8 +1,13 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
+import { toBase36 } from '../helpers';
+
 
 class Header extends Component {
+  inputRef = React.createRef();
+
   logIn = ev => {
     ev.preventDefault();
     this.props.showLogin();
@@ -11,6 +16,15 @@ class Header extends Component {
   logOut = ev => {
     ev.preventDefault();
     this.props.clearAuth();
+  }
+
+  onSubmit = ev => {
+    ev.preventDefault();
+    const input = this.inputRef.current;
+    this.props.history.push(`/order/0/${toBase36(input.value)}`);
+
+    input.value = '';
+    input.blur();
   }
 
   render () {
@@ -42,9 +56,14 @@ class Header extends Component {
                   </ul>
                 }
 
-                <form className="navbar-search pull-left" onClick={ this.props.findOrder }>
-                  <input type="text" className="search-query span2" placeholder="Søk SMSpay #"
-                    ng-model="orderId" pattern="[0-9]*" />
+                <form className="navbar-search pull-left" onSubmit={ this.onSubmit }>
+                  <input type="text"
+                    className="search-query span2"
+                    placeholder="Søk SMSpay #"
+                    pattern="[0-9]+"
+                    ref={ this.inputRef }
+                    required
+                  />
                   <input type="submit" value="Search" hidden />
                 </form>
 
@@ -60,4 +79,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);
