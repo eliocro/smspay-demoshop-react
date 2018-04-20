@@ -3,8 +3,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 class Header extends Component {
+  logIn = ev => {
+    ev.preventDefault();
+    this.props.showLogin();
+  }
+
+  logOut = ev => {
+    ev.preventDefault();
+    this.props.clearAuth();
+  }
+
   render () {
-    const { cart } = this.props;
+    const { cart, auth } = this.props;
     const numItems = cart ? Object.keys(cart).reduce((a,k) => a + cart[k].qty, 0) : 0;
     return (
       <header className="container">
@@ -19,16 +29,25 @@ class Header extends Component {
               </a>
 
               <Link className="brand" to="/" >EksempelShop</Link>
+
               <div className="nav-collapse navbar-responsive-collapse">
-                <ul className="nav">
-                  <li><a href="/">Hjem</a></li>
-                </ul>
+                { auth ?
+                  <ul className="nav">
+                    <li><a>Hallo { auth.user }</a></li>
+                    <li><a href="" onClick={ this.logOut }>Logg ut</a></li>
+                  </ul>
+                  :
+                  <ul className="nav">
+                    <li><a href="" onClick={ this.logIn }>Merchant Login</a></li>
+                  </ul>
+                }
 
                 <form className="navbar-search pull-left" onClick={ this.props.findOrder }>
                   <input type="text" className="search-query span2" placeholder="Søk SMSpay #"
                     ng-model="orderId" pattern="[0-9]*" />
                   <input type="submit" value="Search" hidden />
                 </form>
+
                 <ul className="nav pull-right">
                   <li><Link to="/cart">Vis handlekurv ({ numItems } items)</Link></li>
                 </ul>

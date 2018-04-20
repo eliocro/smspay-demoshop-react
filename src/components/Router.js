@@ -14,7 +14,12 @@ import Login from './Login';
 const Router = props => (
   <BrowserRouter>
     <div>
-      <Header cart={ props.cart } />
+      <Header
+        cart={ props.cart }
+        auth={ props.auth }
+        showLogin={ props.showLogin }
+        clearAuth={ props.clearAuth }
+      />
       <Switch>
         <Route exact path="/" component={ StoreFront } />
         <Route path="/product/:productId/:productName" component={ _props => (

@@ -16,6 +16,18 @@ class Cart extends Component {
     const count = Object.keys(cart).reduce((a,k) => a + cart[k].qty, 0);
     const total = Object.keys(cart).reduce((a,k) => a + cart[k].price * cart[k].qty, 0);
 
+    if(!count) {
+      return (
+        <section className="container">
+          <h1 className="center">Shopping cart</h1><hr />
+          <p>Your cart is empty</p><br />
+          <p>
+            <Link to="/">Continue shopping</Link>
+          </p>
+        </section>
+      );
+    }
+
     return (
       <section className="container">
         <h1 className="center">Shopping cart</h1>
