@@ -24,11 +24,9 @@ class Cart extends Component {
     if(!count) {
       return (
         <section className="container">
-          <h1 className="center">Shopping cart</h1><hr />
+          <h1 className="center">Shopping cart</h1>
           <p>Your cart is empty</p><br />
-          <p>
-            <Link to="/">Continue shopping</Link>
-          </p>
+          <p><Link to="/">Continue shopping</Link></p>
         </section>
       );
     }
@@ -77,7 +75,7 @@ class Cart extends Component {
           <p align="center" ng-show="count">
             <a href="" className="btn btn-primary btn-large" onClick={ this.logIn } >Login as merchant</a>
             <br/><br/>
-            <small>Before being able to checkout, you have to login as an SMSpay merchant.</small>
+            <small>To be able to checkout, you have to login as an SMSpay merchant.</small>
           </p>
         }
         <br/>

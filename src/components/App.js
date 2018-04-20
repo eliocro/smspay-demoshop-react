@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Footer from './Footer';
 import Router from './Router';
 
+import * as SMSpay from '../smspay';
 import { products } from '../data.js';
 
 
@@ -13,9 +14,16 @@ class App extends Component {
     login: false,
   };
 
-  componentWillMount () {
+  componentDidMount () {
     this.loadCart();
     this.loadAuth();
+
+    setTimeout(() => this.checkAuth(), 1000);
+    this.authTs = setInterval(() => this.checkAuth(), 60*1000);
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.authTs);
   }
 
 
@@ -122,6 +130,20 @@ class App extends Component {
     this.setState({ auth: null });
     // Remove from cache
     localStorage.removeItem('smspay-auth');
+  };
+
+  // Periodically check if the auth is valid
+  checkAuth = () => {
+    const { auth } = this.state;
+    if(!auth) {
+      return;
+    }
+
+    SMSpay.getMerchant(auth.merchantId, auth)
+    .catch(err => {
+      console.log('Error checking merchant status', err);
+      this.clearAuth();
+    });
   };
 
 

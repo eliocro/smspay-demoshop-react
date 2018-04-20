@@ -67,3 +67,25 @@ export async function getOrder (id, auth) {
   }
   return data;
 }
+
+
+// Retrieve an order from SMSpay
+export async function getMerchant (id, auth) {
+  if(!auth || !auth.token) {
+    return null;
+  }
+
+  const res = await fetch(`${endpoint}/merchants/${id}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${auth.token}`
+    },
+  });
+  const data = await res.json();
+
+  if(!data.reference) {
+    throw data;
+  }
+  return data;
+}
