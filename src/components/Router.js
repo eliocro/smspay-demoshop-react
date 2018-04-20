@@ -30,10 +30,15 @@ const Router = props => (
             cart={ props.cart }
             removeFromCart={ props.removeFromCart }
             updateCartItem={ props.updateCartItem }
+            auth={ props.auth }
+            showLogin={ props.showLogin }
           />
         ) } />
         <Route exact path="/checkout" component={ _props => (
-          <Checkout cart={ props.cart } />
+          <Checkout { ..._props }
+            cart={ props.cart }
+            auth={ props.auth }
+          />
         ) } />
         <Route component={ NotFound } />
       </Switch>

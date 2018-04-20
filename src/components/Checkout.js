@@ -3,11 +3,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import CartItem from './CartItem';
+import * as SMSpay from '../smspay';
+
 import { formatPrice } from '../helpers';
 import { shipping as shipOptions } from '../data';
-
-const merchantName = 'EksempelShop';
-const merchantId = 8397064334568568;
 
 
 class Checkout extends Component {
@@ -23,6 +22,10 @@ class Checkout extends Component {
 
   placeOrder = ev => {
     ev.preventDefault();
+    const { auth } = this.props;
+    if(!auth) {
+      return this.props.history.push('/cart');
+    }
 
     let phone = this.inputRef.current.value;
     if(phone.length < 10) {
@@ -33,10 +36,10 @@ class Checkout extends Component {
     const order = {
       phone: phone,
       invoice: ref.toString(),
-      description: 'Order #' + ref + ' from ' + merchantName,
+      description: 'Order #' + ref + ' from ' + auth.user,
       currency: 'NOK',
       shipping: this.state.shipping,
-      merchant: merchantId,
+      merchant: auth.merchantId,
     };
 
     const { cart } = this.props;
@@ -50,7 +53,15 @@ class Checkout extends Component {
       i++;
     }
 
-    console.log('Order:', order);
+    console.log('Sending Order:', order);
+    SMSpay.createOrder(order, auth)
+    .then(res => {
+      console.log('Result:', res);
+    })
+    .catch(err => {
+      console.log(err);
+      window.alert(`Error: ${err.message}`);
+    });
   }
 
   setShipping = ev => {
@@ -62,8 +73,8 @@ class Checkout extends Component {
   }
 
   render () {
-    const { cart } = this.props;
-    if(!cart) {
+    const { cart, auth } = this.props;
+    if(!cart || !auth) {
       return null;
     }
 
@@ -126,15 +137,16 @@ class Checkout extends Component {
           <form onSubmit={ this.placeOrder }>
             <h4>Your Total: { formatPrice(final) } NOK</h4>
             <br/>
+            <p>Customer phone number</p>
             <input
               type="text"
               ref={ this.inputRef }
-              placeholder="Your phone number"
+              placeholder="Mobile Phone"
               pattern="[0-9]{8,12}"
               required
             />
             <br/><br/>
-            <input type="submit" className="btn btn-primary btn-large" value="Place order" />
+            <input type="submit" className="btn btn-success btn-large" value="Place order" />
           </form>
         </div>
         <br/>

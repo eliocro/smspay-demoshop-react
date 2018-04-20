@@ -7,8 +7,13 @@ import { formatPrice } from '../helpers';
 
 
 class Cart extends Component {
+  logIn = ev => {
+    ev.preventDefault();
+    this.props.showLogin();
+  }
+
   render () {
-    const { cart } = this.props;
+    const { cart, auth } = this.props;
     if(!cart) {
       return null;
     }
@@ -64,9 +69,17 @@ class Cart extends Component {
           </tfoot>
         </table>
 
-        <p align="center" ng-show="count">
-          <Link to="/checkout" className="btn btn-primary btn-large">Checkout</Link>
-        </p>
+        { auth ?
+          <p align="center" ng-show="count">
+            <Link to="/checkout" className="btn btn-success btn-large">Checkout</Link>
+          </p>
+          :
+          <p align="center" ng-show="count">
+            <a href="" className="btn btn-primary btn-large" onClick={ this.logIn } >Login as merchant</a>
+            <br/><br/>
+            <small>Before being able to checkout, you have to login as an SMSpay merchant.</small>
+          </p>
+        }
         <br/>
         <p>
           <Link to="/">Continue shopping</Link>
